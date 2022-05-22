@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Horse } from 'src/app/classes/horse';
+import { HorseManagementService } from 'src/app/services/horse-management.service';
 
 @Component({
   selector: 'app-course',
@@ -7,8 +8,10 @@ import { Horse } from 'src/app/classes/horse';
   styleUrls: ['./course.component.scss']
 })
 export class CourseComponent {
-  @Input() horses: Horse[] = [];
+  horses: Horse[] = [];
 
-  constructor() { }
+  constructor(private horseManagementService: HorseManagementService) {
+    this.horses = this.horseManagementService.horses;
+   }
 
 }

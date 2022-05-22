@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Horse } from 'src/app/classes/horse';
+import { HorseManagementService } from 'src/app/services/horse-management.service';
 
 @Component({
   selector: 'app-odds-panel',
@@ -8,18 +9,19 @@ import { Horse } from 'src/app/classes/horse';
 })
 export class OddsPanelComponent {
 
-  @Input() horses: Horse[] = [];
-  @Input() results: string[] = [];
-
-  @Output() startRaceEmitter = new EventEmitter<boolean>();
+  horses: Horse[] = [];
+  results: string[] = [];
 
   public raceStarted = false;
 
-  constructor() { }
+  constructor(private horseManagementService: HorseManagementService) {
+    this.horses = this.horseManagementService.horses;
+    this.results = this.horseManagementService.results;
+  }
 
-  startRace() {
+  public startRace() {
     this.raceStarted = true;
-    this.startRaceEmitter.next(true);
+    this.horseManagementService.generateResults();
   }
 
 }

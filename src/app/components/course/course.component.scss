@@ -13,9 +13,16 @@
 
 @keyframes horseMove {
     0%   { left: 0 }
-    100% { left: calc(100vw - 25px) }
+    100% { left: calc(100vw - 300px) }
 }
 
 .course {
+    height: 100%;
+}
+
+.finish-line {
+    border: 3px solid white;
+    position: absolute;
+    left: calc(100vw - 320px);
     height: 100%;
 }

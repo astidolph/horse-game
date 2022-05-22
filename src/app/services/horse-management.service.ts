@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { horseNames } from 'src/assets/horse-names';
 import { Horse } from '../classes/horse';
 
-const RACE_LENGTH = 40;
+const RACE_LENGTH = 10;
 const NUM_HORSES = 10;
 const NUM_RANDOMISED_ODDS_PER_HORSE = 10;
 

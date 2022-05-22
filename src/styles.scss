@@ -2,6 +2,7 @@ body, html {
     margin: 0;
     height: 100%;
     width: 100%;
+    font-family: "Avenir Next", "Segoe UI", "Lucida Grande", sans-serif;
 }
 
 .circle {
@@ -11,4 +12,14 @@ body, html {
     border-radius: 50%;
     display: inline-block;
     white-space: nowrap;
+}
+
+td, th { padding: 3px; padding: .2rem;
+}
+
+th {
+  text-align: left;
+  font-weight: 300;
+  font-size: 20px;
+  font-size: 1.25rem;
 }

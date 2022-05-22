@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { horseNames } from 'src/assets/horse-names';
 import { Horse } from '../classes/horse';
 
-const RACE_LENGTH = 20;
+const RACE_LENGTH = 40;
 const NUM_HORSES = 10;
 const NUM_RANDOMISED_ODDS_PER_HORSE = 10;
 
@@ -58,11 +58,11 @@ export class HorseManagementService {
   }
 
   private getHorseName(): string {
-    var nameFound = false;
-    var horseName = "";
+    let nameFound = false;
+    let horseName = "";
 
     while(!nameFound) {
-      var randomHorseNameIndex = Math.floor(Math.random() * horseNames.length);
+      let randomHorseNameIndex = Math.floor(Math.random() * horseNames.length);
       horseName = horseNames[randomHorseNameIndex];
 
       if (!this.horses.some(x => x.name === horseName))
@@ -77,16 +77,16 @@ export class HorseManagementService {
 
   public generateResults(): void {
     this.setRaceStarted(true);
-    var runningTotalOdds = this.totalOdds;
-    var runningOddsTable = this.oddsTable;
+    let runningTotalOdds = this.totalOdds;
+    let runningOddsTable = this.oddsTable;
 
     for (let i = 0; i < NUM_HORSES; i++) {
       console.log(runningTotalOdds);
       console.log(runningOddsTable);
       // horse finished
-      var horseFinishedIndex = Math.floor(Math.random() * runningTotalOdds);
+      let horseFinishedIndex = Math.floor(Math.random() * runningTotalOdds);
       console.log("number picked" + horseFinishedIndex);
-      var horseThatFinished = runningOddsTable[horseFinishedIndex];
+      let horseThatFinished = runningOddsTable[horseFinishedIndex];
 
       console.log(horseThatFinished);
 
@@ -104,8 +104,8 @@ export class HorseManagementService {
   }
 
   private randomiseColour() {
-    var letters = '0123456789ABCDEF';
-    var colour = "#";
+    const letters = '0123456789ABCDEF';
+    let colour = "#";
     for (var i = 0; i < 6; i++) {
       colour += letters[Math.floor(Math.random() * 16)];
     }
@@ -113,7 +113,7 @@ export class HorseManagementService {
   }
 
   private generateDisplayOdds(totalOdds: number, odd: number): string {
-    var percentageOdds = odd/totalOdds * 100;
+    let percentageOdds = odd/totalOdds * 100;
     return `(${percentageOdds.toFixed(1)}%)`;
   }
 
@@ -126,7 +126,7 @@ export class HorseManagementService {
   }
 
   private setHorseSpeed(finishPlace: number, horse: Horse): void {
-    var horseFound = this.horses.find(x => x.name === horse.name);
+    let horseFound = this.horses.find(x => x.name === horse.name);
 
     if (!horseFound) {
       console.log('Couldnt find the horse to give speed');

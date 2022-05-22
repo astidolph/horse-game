@@ -14,12 +14,11 @@ export class CourseComponent {
 
   constructor(private horseManagementService: HorseManagementService) {
     this.horses = this.horseManagementService.horses;
-  
     this.raceStarted = this.horseManagementService.raceStarted;
    }
 
    getHorseSpeed(speed: number): string {
-     return `myfirst ${speed}s forwards`;
+     return `horseMove ${speed}s cubic-bezier(.47,.22,.11,.61) forwards`;
    }
 
 }

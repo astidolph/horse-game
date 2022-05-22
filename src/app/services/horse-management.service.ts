@@ -3,9 +3,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { horseNames } from 'src/assets/horse-names';
 import { Horse } from '../classes/horse';
 
-const RACE_LENGTH = 40;
+const RACE_LENGTH = 60;
 const NUM_HORSES = 10;
-const NUM_RANDOMISED_ODDS_PER_HORSE = 10;
+const NUM_RANDOMISED_ODDS_PER_HORSE = 100;
 const RACE_TIMING_FUNCTION = 'cubic-bezier(.47,.22,.11,.61)';
 
 @Injectable({

@@ -3,9 +3,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { horseNames } from 'src/assets/horse-names';
 import { Horse } from '../classes/horse';
 
-const RACE_LENGTH = 10;
+const RACE_LENGTH = 40;
 const NUM_HORSES = 10;
 const NUM_RANDOMISED_ODDS_PER_HORSE = 10;
+const RACE_TIMING_FUNCTION = 'cubic-bezier(.47,.22,.11,.61)';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,11 @@ export class HorseManagementService {
 
   get results() {
     return this._results;
+  }
+
+  get timingFunction(): string {
+    //return RACE_TIMING_FUNCTION;
+    return `cubic-bezier(${Math.random()},${Math.random()},${Math.random()},${Math.random()})`;
   }
 
   constructor() { }

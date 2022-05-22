@@ -11,14 +11,15 @@ import { HorseManagementService } from 'src/app/services/horse-management.servic
 export class CourseComponent {
   horses: Horse[] = [];
   raceStarted = new Observable<boolean>();
+  timingFunction = '';
 
   constructor(private horseManagementService: HorseManagementService) {
     this.horses = this.horseManagementService.horses;
     this.raceStarted = this.horseManagementService.raceStarted;
-   }
+  }
 
    getHorseSpeed(speed: number): string {
-     return `horseMove ${speed}s cubic-bezier(.47,.22,.11,.61) forwards`;
+     return `horseMove ${speed}s ${this.horseManagementService.timingFunction} forwards`;
    }
 
 }

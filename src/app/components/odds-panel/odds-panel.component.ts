@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Horse } from 'src/app/classes/horse';
 import { HorseManagementService } from 'src/app/services/horse-management.service';
 
@@ -12,7 +13,7 @@ export class OddsPanelComponent {
   horses: Horse[] = [];
   results: string[] = [];
 
-  public raceStarted = false;
+  public raceStarted = new Observable<boolean>();
 
   constructor(private horseManagementService: HorseManagementService) {
     this.horses = this.horseManagementService.horses;

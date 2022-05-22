@@ -21,7 +21,7 @@
           <button type="button" (click)="startRace()">Race!</button>
         </div>
     </div>
-    <div class="results-container" *ngIf="raceStarted">
+    <div class="results-container" *ngIf="raceStarted | async">
         <table>
             <thead>
             <tr>

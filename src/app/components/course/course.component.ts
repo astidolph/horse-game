@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Horse } from 'src/app/classes/horse';
 import { HorseManagementService } from 'src/app/services/horse-management.service';
 
@@ -9,10 +10,11 @@ import { HorseManagementService } from 'src/app/services/horse-management.servic
 })
 export class CourseComponent {
   horses: Horse[] = [];
-  raceStarted = false;
+  raceStarted = new Observable<boolean>();
 
   constructor(private horseManagementService: HorseManagementService) {
     this.horses = this.horseManagementService.horses;
+  
     this.raceStarted = this.horseManagementService.raceStarted;
    }
 

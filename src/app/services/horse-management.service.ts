@@ -1,21 +1,29 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { horseNames } from 'src/assets/horse-names';
 import { Horse } from '../classes/horse';
+
+const RACE_LENGTH = 20;
+const NUM_HORSES = 10;
+const NUM_RANDOMISED_ODDS_PER_HORSE = 10;
 
 @Injectable({
   providedIn: 'root'
 })
 export class HorseManagementService {
-  private NUM_HORSES = 10;
 
   private _horses: Horse[] = [];
   private _results: string[] = [];
-  private _raceStarted = false;
+  private _raceStarted = new BehaviorSubject<boolean>(false);
   private totalOdds = 0;
   private oddsTable: Horse[] = [];
 
-  get raceStarted() {
-    return this._raceStarted = true;
+  get raceStarted(): Observable<boolean> {
+    return this._raceStarted.asObservable();
+  }
+
+  setRaceStarted(val: boolean) {
+    this._raceStarted.next(val);
   }
 
   get horses() {
@@ -29,7 +37,7 @@ export class HorseManagementService {
   constructor() { }
 
   generateHorses() {
-    for (let i = 1; i < this.NUM_HORSES + 1; i++) {
+    for (let i = 1; i < NUM_HORSES + 1; i++) {
       this.horses.push(
         {
           name: this.getHorseName(),
@@ -64,14 +72,15 @@ export class HorseManagementService {
   }
 
   private generateOdds(): number {
-    return Math.floor((Math.random() * 10) + 1);
+    return Math.floor((Math.random() * NUM_RANDOMISED_ODDS_PER_HORSE) + 1);
   }
 
   public generateResults(): void {
+    this.setRaceStarted(true);
     var runningTotalOdds = this.totalOdds;
     var runningOddsTable = this.oddsTable;
 
-    for (let i = 0; i < this.NUM_HORSES; i++) {
+    for (let i = 0; i < NUM_HORSES; i++) {
       console.log(runningTotalOdds);
       console.log(runningOddsTable);
       // horse finished
@@ -84,7 +93,7 @@ export class HorseManagementService {
       // push horse into results table
       this.results.push(horseThatFinished.name);
 
-      this.setHorseSpeed(i, horseThatFinished);
+      this.setHorseSpeed(NUM_HORSES - i, horseThatFinished);
 
       // remove all entries of finished horse from odds table
       runningOddsTable = runningOddsTable.filter(x => x.name !== horseThatFinished.name);
@@ -124,6 +133,6 @@ export class HorseManagementService {
       return;
     }
 
-    horseFound.speed = 10 + finishPlace;
+    horseFound.speed = RACE_LENGTH - finishPlace;
   }
 }

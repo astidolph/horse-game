@@ -1,0 +1,18 @@
+.odds-container {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+
+td, th { padding: 3px; padding: .2rem;
+}
+
+th {
+  text-align: left;
+  font-weight: 300;
+  font-size: 20px;
+  font-size: 1.25rem;
+}
+
+td { font-family: 'Avenir Next', 'Segoe UI', 'Lucida Grande', sans-serif; }

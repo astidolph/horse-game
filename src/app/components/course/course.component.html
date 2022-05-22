@@ -1,0 +1,9 @@
+<div class="course">
+    <div class="race-line" *ngFor="horse of horses"></div>
+    <div class="horse-container">
+        <div class="horse circle" *ngFor="let horse of horses; let idx = index" 
+        [style.background]="horse.colour" 
+        [style.top]="idx * 5 + '%'"
+        [style.animation]="'myfirst 20s'"></div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+body, html {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.circle {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}

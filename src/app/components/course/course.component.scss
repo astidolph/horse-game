@@ -1,0 +1,16 @@
+
+.horse-container {
+    height: 100%;
+    .horse {
+        position: absolute;
+    }
+}
+
+@keyframes myfirst {
+    0%   { left: 0 }
+    100% { left: calc(100vw - 25px) }
+}
+
+.course {
+    height: 100%;
+}

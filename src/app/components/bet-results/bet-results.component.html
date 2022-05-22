@@ -1,0 +1,22 @@
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Total Bet</th>
+        <th>Bets</th>
+        <th>Gained/Losted</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let playerBet of playerBets; let idx = index">
+        <td>{{ playerBet.player }}</td>
+        <td>{{ sumPlayerBets(playerBet.bets) }}</td>
+        <td>
+            <div class="circle bet" [ngStyle]="{ background: horseBet.horse.colour }" *ngFor="let horseBet of getHorsesBetOn(playerBet)">
+                <span>{{ horseBet.bet }}</span>
+            </div>
+        </td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>

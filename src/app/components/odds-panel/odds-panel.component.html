@@ -1,10 +1,10 @@
 <div class="odds-container">
-    <div class="odds">
+    <div class="odds panel">
         <table>
           <thead>
             <tr>
-              <th>Colour</th>
-              <th>Name:</th>
+              <th>Colour:</th>
+              <th>Horse:</th>
               <th>Odds:</th>
             </tr>
           </thead>
@@ -21,7 +21,7 @@
           <button type="button" (click)="startRace()">Race!</button>
         </div>
     </div>
-    <div class="results-container" *ngIf="raceStarted | async">
+    <div class="results-container panel" *ngIf="raceStarted | async">
         <table>
             <thead>
             <tr>
@@ -35,5 +35,8 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div class="bets-container panel" *ngIf="raceStarted | async">
+      <app-bet-results></app-bet-results>
     </div>
 </div>

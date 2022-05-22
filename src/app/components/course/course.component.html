@@ -5,7 +5,7 @@
         [style.background]="horse.colour" 
         [style.top]="idx * 5 + '%'"
         [ngStyle]="{ 'animation': (raceStarted | async ) ? getHorseSpeed(horse.speed) : '' }">
-        {{ horse.name }}
+        <span>{{ horse.name }}</span>
         </div>
     </div>
 </div>

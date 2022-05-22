@@ -10,8 +10,13 @@ export class HorseManagementService {
 
   private _horses: Horse[] = [];
   private _results: string[] = [];
+  private _raceStarted = false;
   private totalOdds = 0;
   private oddsTable: Horse[] = [];
+
+  get raceStarted() {
+    return this._raceStarted = true;
+  }
 
   get horses() {
     return this._horses;
@@ -38,8 +43,6 @@ export class HorseManagementService {
 
     this.totalOdds = this.horses.reduce((acc, obj) => acc + obj.odds, 0);
     console.log(this.totalOdds);
-
-    this.horses.forEach(h => h.speed = this.getHorseSpeed(h.odds));
 
     this.horses.forEach(h => h.oddsDisplay = this.generateDisplayOdds(this.totalOdds, h.odds));
 
@@ -81,6 +84,8 @@ export class HorseManagementService {
       // push horse into results table
       this.results.push(horseThatFinished.name);
 
+      this.setHorseSpeed(i, horseThatFinished);
+
       // remove all entries of finished horse from odds table
       runningOddsTable = runningOddsTable.filter(x => x.name !== horseThatFinished.name);
 
@@ -111,7 +116,14 @@ export class HorseManagementService {
     });
   }
 
-  private getHorseSpeed(speedScaling: number): number {
-    return 0;
+  private setHorseSpeed(finishPlace: number, horse: Horse): void {
+    var horseFound = this.horses.find(x => x.name === horse.name);
+
+    if (!horseFound) {
+      console.log('Couldnt find the horse to give speed');
+      return;
+    }
+
+    horseFound.speed = 10 + finishPlace;
   }
 }

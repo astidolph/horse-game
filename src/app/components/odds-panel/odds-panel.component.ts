@@ -17,10 +17,10 @@ export class OddsPanelComponent {
   constructor(private horseManagementService: HorseManagementService) {
     this.horses = this.horseManagementService.horses;
     this.results = this.horseManagementService.results;
+    this.raceStarted = this.horseManagementService.raceStarted;
   }
 
   public startRace() {
-    this.raceStarted = true;
     this.horseManagementService.generateResults();
   }
 

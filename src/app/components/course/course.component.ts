@@ -9,9 +9,15 @@ import { HorseManagementService } from 'src/app/services/horse-management.servic
 })
 export class CourseComponent {
   horses: Horse[] = [];
+  raceStarted = false;
 
   constructor(private horseManagementService: HorseManagementService) {
     this.horses = this.horseManagementService.horses;
+    this.raceStarted = this.horseManagementService.raceStarted;
+   }
+
+   getHorseSpeed(speed: number): string {
+     return `myfirst ${speed}s forwards`;
    }
 
 }

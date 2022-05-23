@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, timeout } from 'rxjs';
 import { horseNames } from 'src/assets/horse-names';
 import { Horse } from '../classes/horse';
 
@@ -16,6 +16,7 @@ export class HorseManagementService {
   private _horses: Horse[] = [];
   private _results: Horse[] = [];
   private _raceStarted = new BehaviorSubject<boolean>(false);
+  private _raceFinished = new BehaviorSubject<boolean>(false);
   private totalOdds = 0;
   private oddsTable: Horse[] = [];
 
@@ -23,8 +24,13 @@ export class HorseManagementService {
     return this._raceStarted.asObservable();
   }
 
+  get raceFinished(): Observable<boolean> {
+    return this._raceFinished.asObservable();
+  }
+
   setRaceStarted(val: boolean) {
     this._raceStarted.next(val);
+    setTimeout(() => this._raceFinished.next(true), RACE_LENGTH * 1000);
   }
 
   get horses() {
@@ -85,7 +91,7 @@ export class HorseManagementService {
       let horseFinishedIndex = Math.floor(Math.random() * this.totalOdds);
       let horseThatFinished = this.oddsTable[horseFinishedIndex];
 
-      console.log(`${horseThatFinished.name} in ${i} place`);
+      console.log(`${horseThatFinished.name} in ${i + 1} place`);
 
       this.setHorseSpeed(orderedHorseSpeeds[i], horseThatFinished);
 

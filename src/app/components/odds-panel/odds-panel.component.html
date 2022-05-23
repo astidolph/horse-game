@@ -22,20 +22,7 @@
         </div>
     </div>
     <div class="results-container panel" *ngIf="raceStarted | async">
-        <table>
-            <thead>
-            <tr>
-                <th>RESULTS</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let result of results; let idx = index">
-                <td>{{ idx + 1 }}</td>
-                <td>{{ result.name }}</td>
-                <td>{{ result.speed * 1000 | date:'mm:ss' }}</td>
-            </tr>
-            </tbody>
-        </table>
+      <app-horse-finish-results></app-horse-finish-results>
     </div>
     <div class="bets-container panel" *ngIf="raceStarted | async">
       <app-bet-results></app-bet-results>

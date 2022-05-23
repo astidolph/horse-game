@@ -7,6 +7,7 @@ import { BettingPanelComponent } from './components/betting-panel/betting-panel.
 import { BetResultsComponent } from './components/bet-results/bet-results.component';
 import { OrderByOddsPipe } from './pipes/orderByPipe';
 import { OddsPanelComponent } from './components/odds-panel/odds-panel.component';
+import { HorseFinishResultsComponent } from './components/horse-finish-results/horse-finish-results.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { OddsPanelComponent } from './components/odds-panel/odds-panel.component
     OddsPanelComponent,
     BettingPanelComponent,
     BetResultsComponent,
-    OrderByOddsPipe
+    OrderByOddsPipe,
+    HorseFinishResultsComponent
   ],
   imports: [
     BrowserModule

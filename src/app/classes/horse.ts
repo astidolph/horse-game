@@ -4,4 +4,5 @@ export class Horse {
     public oddsDisplay: string = "";
     public colour: string = "";
     public speed: number = 0;
+    public timingFunction: string = "";
 }

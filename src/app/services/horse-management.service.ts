@@ -35,11 +35,6 @@ export class HorseManagementService {
     return this._results;
   }
 
-  get timingFunction(): string {
-    //return RACE_TIMING_FUNCTION;
-    return `cubic-bezier(${Math.random()},${Math.random()},${Math.random()},${Math.random()})`;
-  }
-
   constructor() { }
 
   generateHorses() {
@@ -50,7 +45,8 @@ export class HorseManagementService {
           odds: this.generateOdds(),
           oddsDisplay: "",
           colour: this.randomiseColour(),
-          speed: 0
+          speed: 0,
+          timingFunction: this.timingFunction()
         }
       )
     }
@@ -140,5 +136,14 @@ export class HorseManagementService {
     }
 
     horseFound.speed = RACE_LENGTH - finishPlace;
+  }
+
+  private timingFunction(): string {
+    let point1 = (0.8 + (Math.random() * 0.2 * (Math.round(Math.random()) ? 1 : -1)));
+    let point2 = (0.5 + (Math.random() * 0.5 * (Math.round(Math.random()) ? 1 : -1)));
+    let point3 = (0.6 + (Math.random() * 0.1 * (Math.round(Math.random()) ? 1 : -1)));
+    let point4 = (0.9 + (Math.random() * 0.1 * (Math.round(Math.random()) ? 1 : -1)));
+
+    return `cubic-bezier(${point1},${point2},${point3},${point4})`;
   }
 }

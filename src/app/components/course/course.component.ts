@@ -18,8 +18,8 @@ export class CourseComponent {
     this.raceStarted = this.horseManagementService.raceStarted;
   }
 
-   getHorseSpeed(speed: number): string {
-     return `horseMove ${speed}s ${this.horseManagementService.timingFunction} forwards`;
+   getHorseSpeed(speed: number, timingFunction: string): string {
+     return `horseMove ${timingFunction} ${speed}s forwards`;
    }
 
 }

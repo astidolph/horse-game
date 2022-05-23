@@ -4,7 +4,7 @@
         <div class="horse circle" *ngFor="let horse of horses; let idx = index" 
         [style.background]="horse.colour" 
         [style.top]="idx * 5 + '%'"
-        [ngStyle]="{ 'animation': (raceStarted | async ) ? getHorseSpeed(horse.speed) : '' }">
+        [ngStyle]="{ 'animation': (raceStarted | async ) ? getHorseSpeed(horse.speed, horse.timingFunction) : '' }">
         <span>{{ horse.name }}</span>
         </div>
         <div class="finish-line"></div>

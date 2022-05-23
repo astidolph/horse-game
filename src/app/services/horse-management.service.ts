@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, timeout } from 'rxjs';
 import { horseNames } from 'src/assets/horse-names';
 import { Horse } from '../classes/horse';
 
-const RACE_LENGTH = 30;
+const RACE_LENGTH = 90;
 const NUM_HORSES = 10;
 const NUM_RANDOMISED_ODDS_PER_HORSE = 100;
 const HORSE_FINISH_TIME_DIFFERENCIAL = 40;

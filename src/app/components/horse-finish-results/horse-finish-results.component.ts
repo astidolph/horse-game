@@ -11,7 +11,6 @@ import { HorseManagementService } from 'src/app/services/horse-management.servic
 export class HorseFinishResultsComponent {
   results: Horse[] = [];
   staggeredResults: Horse[] = [];
-  staggeredResults$ = new Subject<Horse[]>();
 
   constructor(private horseManagementService: HorseManagementService) { 
     this.results = this.horseManagementService.results;
@@ -19,7 +18,6 @@ export class HorseFinishResultsComponent {
     this.results.forEach(r => {
         setTimeout(() => {
         this.staggeredResults.push(r);
-        this.staggeredResults$.next(this.staggeredResults);
       }, r.speed * 1000)
     });
   }

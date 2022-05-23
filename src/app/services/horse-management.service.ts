@@ -49,7 +49,9 @@ export class HorseManagementService {
         {
           name: this.getHorseName(),
           odds: this.generateOdds(),
-          oddsDisplay: "",
+          percentageOdds: 0,
+          fractionalOdds: "1:1",
+          decimalOdds: 1.0,
           colour: this.randomiseColour(),
           speed: 0,
           timingFunction: this.timingFunction()
@@ -59,9 +61,28 @@ export class HorseManagementService {
 
     this.totalOdds = this.horses.reduce((acc, obj) => acc + obj.odds, 0);
 
-    this.horses.forEach(h => h.oddsDisplay = this.generateDisplayOdds(this.totalOdds, h.odds));
+    this.horses.forEach(h => {
+      h.percentageOdds = this.generatePercentageOdds(this.totalOdds, h.odds);
+      h.fractionalOdds = this.generateFractionalOdds(this.totalOdds, h.odds);
+      h.decimalOdds = this.generateDecimalOdds(this.totalOdds, h.odds);
+    });
 
     this.generateOddsTable();
+  }
+
+  private generatePercentageOdds(totalOdds: number, odd: number): number {
+    return odd/totalOdds * 100;
+  }
+
+  // (1 divided by (the percentage divided by 100)) minus 1
+  private generateFractionalOdds(totalOdds: number, odds: number): string {
+    var equation = (1 / (this.generatePercentageOdds(totalOdds, odds) / 100)) - 1;
+    return `${equation.toFixed(2)}:1`;
+  }
+
+  // 1 divided by (the percentage divided by 100)
+  private generateDecimalOdds(totalOdds: number, odds: number): number {
+    return 1 / (this.generatePercentageOdds(totalOdds, odds) / 100);
   }
 
   private getHorseName(): string {
@@ -123,11 +144,6 @@ export class HorseManagementService {
       colour += letters[Math.floor(Math.random() * 16)];
     }
     return colour;
-  }
-
-  private generateDisplayOdds(totalOdds: number, odd: number): string {
-    let percentageOdds = odd/totalOdds * 100;
-    return `(${percentageOdds.toFixed(1)}%)`;
   }
 
   private generateOddsTable() {

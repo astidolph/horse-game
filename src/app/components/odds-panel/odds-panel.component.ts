@@ -13,7 +13,7 @@ import { HorseManagementService } from 'src/app/services/horse-management.servic
 export class OddsPanelComponent {
 
   horses: Horse[] = [];
-  results: string[] = [];
+  results: Horse[] = [];
   public raceStarted = new Observable<boolean>();
 
 

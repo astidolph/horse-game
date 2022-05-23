@@ -3,10 +3,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { horseNames } from 'src/assets/horse-names';
 import { Horse } from '../classes/horse';
 
-const RACE_LENGTH = 60;
+const RACE_LENGTH = 90;
 const NUM_HORSES = 10;
 const NUM_RANDOMISED_ODDS_PER_HORSE = 100;
-const RACE_TIMING_FUNCTION = 'cubic-bezier(.47,.22,.11,.61)';
+const HORSE_FINISH_TIME_DIFFERENCIAL = 40;
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ const RACE_TIMING_FUNCTION = 'cubic-bezier(.47,.22,.11,.61)';
 export class HorseManagementService {
 
   private _horses: Horse[] = [];
-  private _results: string[] = [];
+  private _results: Horse[] = [];
   private _raceStarted = new BehaviorSubject<boolean>(false);
   private totalOdds = 0;
   private oddsTable: Horse[] = [];
@@ -78,31 +78,38 @@ export class HorseManagementService {
   }
 
   public generateResults(): void {
-    this.setRaceStarted(true);
-    let runningTotalOdds = this.totalOdds;
-    let runningOddsTable = this.oddsTable;
+    // Create speed vector
+    const orderedHorseSpeeds = this.speedVector();
 
     for (let i = 0; i < NUM_HORSES; i++) {
-      console.log(runningTotalOdds);
-      console.log(runningOddsTable);
       // horse finished
-      let horseFinishedIndex = Math.floor(Math.random() * runningTotalOdds);
-      console.log("number picked" + horseFinishedIndex);
-      let horseThatFinished = runningOddsTable[horseFinishedIndex];
+      let horseFinishedIndex = Math.floor(Math.random() * this.totalOdds);
+      let horseThatFinished = this.oddsTable[horseFinishedIndex];
 
-      console.log(horseThatFinished);
+      console.log(`${horseThatFinished.name} in ${i} place`);
+
+      this.setHorseSpeed(orderedHorseSpeeds[i], horseThatFinished);
 
       // push horse into results table
-      this.results.push(horseThatFinished.name);
-
-      this.setHorseSpeed(NUM_HORSES - i, horseThatFinished);
+      this.results.push(horseThatFinished);
 
       // remove all entries of finished horse from odds table
-      runningOddsTable = runningOddsTable.filter(x => x.name !== horseThatFinished.name);
+      this.oddsTable = this.oddsTable.filter(x => x.name !== horseThatFinished.name);
 
       // adjust odds total
-      runningTotalOdds = runningTotalOdds - horseThatFinished.odds;
+      this.totalOdds = this.totalOdds - horseThatFinished.odds;
     }
+
+    this.setRaceStarted(true);
+  }
+
+  private speedVector() {
+    let speeds: number[] = [];
+    for (let i = 0; i < NUM_HORSES; i++) {
+      speeds.push(RACE_LENGTH - HORSE_FINISH_TIME_DIFFERENCIAL + (Math.floor(Math.random() * HORSE_FINISH_TIME_DIFFERENCIAL)));
+    }
+    console.log(speeds);
+    return speeds.sort((a, b) => a - b);
   }
 
   private randomiseColour() {
@@ -127,7 +134,7 @@ export class HorseManagementService {
     });
   }
 
-  private setHorseSpeed(finishPlace: number, horse: Horse): void {
+  private setHorseSpeed(speed: number, horse: Horse): void {
     let horseFound = this.horses.find(x => x.name === horse.name);
 
     if (!horseFound) {
@@ -135,14 +142,14 @@ export class HorseManagementService {
       return;
     }
 
-    horseFound.speed = RACE_LENGTH - finishPlace;
+    horseFound.speed = speed;
   }
 
   private timingFunction(): string {
     let point1 = (0.8 + (Math.random() * 0.2 * (Math.round(Math.random()) ? 1 : -1)));
     let point2 = (0.5 + (Math.random() * 0.5 * (Math.round(Math.random()) ? 1 : -1)));
     let point3 = (0.6 + (Math.random() * 0.1 * (Math.round(Math.random()) ? 1 : -1)));
-    let point4 = (0.9 + (Math.random() * 0.1 * (Math.round(Math.random()) ? 1 : -1)));
+    let point4 = 1;
 
     return `cubic-bezier(${point1},${point2},${point3},${point4})`;
   }

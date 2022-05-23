@@ -16,7 +16,7 @@
                 <span>{{ horseBet.bet }}</span>
             </div>
         </td>
-        <td></td>
+        <td>{{ calculateWinnings(playerBet.bets)| number:'1.2-2' }}</td>
     </tr>
     </tbody>
 </table>

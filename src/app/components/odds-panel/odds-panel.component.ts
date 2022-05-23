@@ -1,8 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Pipe, PipeTransform } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Horse } from 'src/app/classes/horse';
-import { PlayerBets, PlayerHorseBet } from 'src/app/classes/player-bets';
-import { BettingService } from 'src/app/services/betting.service';
 import { HorseManagementService } from 'src/app/services/horse-management.service';
 
 @Component({
@@ -26,5 +24,4 @@ export class OddsPanelComponent {
   public startRace() {
     this.horseManagementService.generateResults();
   }
-
 }

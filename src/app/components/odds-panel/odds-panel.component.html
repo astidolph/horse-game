@@ -9,7 +9,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let horse of horses">
+            <tr *ngFor="let horse of horses | orderByOdds">
               <td class="circle" [ngStyle]="{ background: horse.colour }"></td>
               <td>{{ horse.name }}</td>
               <td>{{ horse.oddsDisplay }}</td>
@@ -32,7 +32,7 @@
             <tr *ngFor="let result of results; let idx = index">
                 <td>{{ idx + 1 }}</td>
                 <td>{{ result.name }}</td>
-                <td>00:{{ result.speed }}</td>
+                <td>{{ result.speed * 1000 | date:'mm:ss' }}</td>
             </tr>
             </tbody>
         </table>

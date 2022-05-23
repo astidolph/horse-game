@@ -52,7 +52,6 @@ export class HorseManagementService {
     }
 
     this.totalOdds = this.horses.reduce((acc, obj) => acc + obj.odds, 0);
-    console.log(this.totalOdds);
 
     this.horses.forEach(h => h.oddsDisplay = this.generateDisplayOdds(this.totalOdds, h.odds));
 
@@ -108,7 +107,6 @@ export class HorseManagementService {
     for (let i = 0; i < NUM_HORSES; i++) {
       speeds.push(RACE_LENGTH - HORSE_FINISH_TIME_DIFFERENCIAL + (Math.floor(Math.random() * HORSE_FINISH_TIME_DIFFERENCIAL)));
     }
-    console.log(speeds);
     return speeds.sort((a, b) => a - b);
   }
 

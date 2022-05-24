@@ -14,13 +14,21 @@ body, html {
     white-space: nowrap;
 }
 
+.text-center {
+  text-align: center;
+}
+
+// tables
+
+td, th {
+  padding: 0.1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 th {
   text-align: left;
   font-weight: 300;
   font-size: 20px;
   font-size: 1.25rem;
-}
-
-.text-center {
-  text-align: center;
 }

@@ -17,7 +17,14 @@
                 <span class="horse-name">{{ horseBet.horse.name }}</span>
             </div>
         </td>
-        <td><span class="winnings" [ngClass]="{'negative': playerBet.winnings < 0, 'positive' : playerBet.winnings > 0 }">{{ playerBet.winnings | number:'1.2-2' }}</span></td>
+        <td>
+            <div class="winnings" 
+                [ngClass]="{'negative': playerBet.winnings < 0, 'positive' : playerBet.winnings > 0 }">
+                {{ playerBet.winnings | number:'1.2-2' }}
+                <span class="arrow up" *ngIf="playerBet.winnings > 0"></span>
+                <span class="arrow down" *ngIf="playerBet.winnings < 0"></span>
+            </div>
+        </td>
     </tr>
     </tbody>
 </table>

@@ -22,6 +22,8 @@
 }
 
 .winnings {
+    position: relative;
+
     &.negative {
         color: red;
     }
@@ -30,3 +32,23 @@
         color: green;
     }
 }
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    right: 0;
+    position: absolute;
+    top: 25%;
+  }
+  
+  .up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+  
+  .down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }

@@ -10,7 +10,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let horse of horses | orderByOdds">
-              <td class="circle" [ngStyle]="{ background: horse.colour }"></td>
+              <td class="text-center"><span class="circle" [ngStyle]="{ background: horse.colour }"></span></td>
               <td>{{ horse.name }}</td>
               <td>{{ horse.percentageOdds | number:'1.2-2' }}%</td>
               <td>{{ horse.fractionalOdds }}</td>

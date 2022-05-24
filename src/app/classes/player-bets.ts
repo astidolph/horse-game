@@ -2,7 +2,8 @@ import { Horse } from "./horse";
 
 export class PlayerBets {
     public player!: string;
-    public bets: PlayerHorseBet[] = []
+    public bets: PlayerHorseBet[] = [];
+    public winnings: number = 0;
 
     constructor(player: string, bets: PlayerHorseBet[]) {
         this.player = player;

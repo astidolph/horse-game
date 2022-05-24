@@ -14,9 +14,10 @@
         <td>
             <div class="circle bet" [ngStyle]="{ background: horseBet.horse.colour }" *ngFor="let horseBet of getHorsesBetOn(playerBet)">
                 <span>{{ horseBet.bet }}</span>
+                <span class="horse-name">{{ horseBet.horse.name }}</span>
             </div>
         </td>
-        <td>{{ calculateWinnings(playerBet.bets)| number:'1.2-2' }}</td>
+        <td><span class="winnings" [ngClass]="{'negative': playerBet.winnings < 0, 'positive' : playerBet.winnings > 0 }">{{ playerBet.winnings | number:'1.2-2' }}</span></td>
     </tr>
     </tbody>
 </table>

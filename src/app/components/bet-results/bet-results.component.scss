@@ -1,3 +1,32 @@
 .circle.bet {
     text-align: center;
+    position: relative;
+    padding: 5px;
+
+    .horse-name {
+        display: none;
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: white;
+        border: 1px solid black;
+        padding: 5px;
+    }
+}
+
+.circle.bet:hover {
+    .horse-name {
+        display: block;
+    }
+}
+
+.winnings {
+    &.negative {
+        color: red;
+    }
+
+    &.positive {
+        color: green;
+    }
 }

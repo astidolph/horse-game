@@ -16,6 +16,8 @@ export class BetResultsComponent {
   constructor(private bettingService: BettingService, private horseManagementService: HorseManagementService) {
     this.playerBets = this.bettingService.playerBets;
     this.winningHorse = this.horseManagementService.results[0];
+
+    this.playerBets.forEach(x => x.winnings = this.calculateWinnings(x.bets));
   }
 
   public sumPlayerBets(bets: PlayerHorseBet[]) {
@@ -28,7 +30,7 @@ export class BetResultsComponent {
     return playerBets.bets.filter(x => x.bet != 0);
   }
 
-  public calculateWinnings(playerBets: PlayerHorseBet[]) {
+  public calculateWinnings(playerBets: PlayerHorseBet[]): number {
     var totalBet: number = playerBets.reduce((acc, val) => acc + val.bet, 0);
     console.log('total' + totalBet);
     var betOnWinningHorse = playerBets.find(x => x.horse.name === this.winningHorse?.name);

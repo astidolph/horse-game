@@ -104,7 +104,7 @@ export class HorseManagementService {
   }
 
   public generateResults(): void {
-    // Create speed vector
+    // Create speed vector fastest-slowest times, each horse will be assigned speed based on finish place
     const orderedHorseSpeeds = this.speedVector();
 
     for (let i = 0; i < NUM_HORSES; i++) {
@@ -129,6 +129,7 @@ export class HorseManagementService {
     this.setRaceStarted(true);
   }
 
+  // Randomise finish times of horses between a set amount near the race length and sort by fastest-slowest
   private speedVector() {
     let speeds: number[] = [];
     for (let i = 0; i < NUM_HORSES; i++) {
@@ -152,6 +153,8 @@ export class HorseManagementService {
         this.oddsTable.push(h);
       }
     });
+    console.log('Horse odds table');
+    console.log(this.oddsTable);
   }
 
   private setHorseSpeed(speed: number, horse: Horse): void {

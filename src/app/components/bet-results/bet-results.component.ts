@@ -11,11 +11,16 @@ import { HorseManagementService } from 'src/app/services/horse-management.servic
 })
 export class BetResultsComponent {
   public playerBets: PlayerBets[] = [];
-  public winningHorse: Horse | undefined = undefined;
+  public winningHorses: Horse[] = [];
+  private stakeSplit = 1;
+
 
   constructor(private bettingService: BettingService, private horseManagementService: HorseManagementService) {
     this.playerBets = this.bettingService.playerBets;
-    this.winningHorse = this.horseManagementService.results[0];
+    let topHorseSpeed = this.horseManagementService.results.map(x => x.speed).reduce((accumulatedValue, currentValue) => Math.min(accumulatedValue, currentValue));
+    this.winningHorses = this.horseManagementService.results.filter(x => x.speed === topHorseSpeed);
+    this.stakeSplit = this.winningHorses.length;
+    console.log('Winning horse(s): ' + this.winningHorses + ' in ' + topHorseSpeed);
 
     this.playerBets.forEach(x => x.winnings = this.calculateWinnings(x.bets));
   }
@@ -32,13 +37,14 @@ export class BetResultsComponent {
 
   public calculateWinnings(playerBets: PlayerHorseBet[]): number {
     var totalBet: number = playerBets.reduce((acc, val) => acc + val.bet, 0);
-    console.log('total' + totalBet);
-    var betOnWinningHorse = playerBets.find(x => x.horse.name === this.winningHorse?.name);
 
-    if (betOnWinningHorse === undefined) {
+    var betsOnWinningHorses = playerBets.filter(x => this.winningHorses.includes(x.horse)).filter(x => x.bet > 0);
+
+    if (betsOnWinningHorses.length === 0) {
       return -totalBet;
     } else {
-      return (betOnWinningHorse.bet * betOnWinningHorse.horse.decimalOdds) - totalBet;
+      let totalWinnings = betsOnWinningHorses.reduce((acc, val) => acc +  (val.bet * (val.horse.decimalOdds - 1)) / this.stakeSplit, 0);
+      return totalWinnings - totalBet;
     }
 
   }

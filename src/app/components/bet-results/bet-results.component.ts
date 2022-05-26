@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Horse } from 'src/app/classes/horse';
 import { PlayerBets, PlayerHorseBet } from 'src/app/classes/player-bets';
 import { BettingService } from 'src/app/services/betting.service';
@@ -13,9 +14,11 @@ export class BetResultsComponent {
   public playerBets: PlayerBets[] = [];
   public winningHorses: Horse[] = [];
   private stakeSplit = 1;
+  public raceFinished$ = new Observable<boolean>();
 
 
   constructor(private bettingService: BettingService, private horseManagementService: HorseManagementService) {
+    this.raceFinished$ = this.horseManagementService.raceFinished;
     this.playerBets = this.bettingService.playerBets;
     let topHorseSpeed = this.horseManagementService.results.map(x => x.speed).reduce((accumulatedValue, currentValue) => Math.min(accumulatedValue, currentValue));
     this.winningHorses = this.horseManagementService.results.filter(x => x.speed === topHorseSpeed);

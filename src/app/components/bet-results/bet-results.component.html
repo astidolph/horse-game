@@ -19,11 +19,15 @@
         </td>
         <td>
             <div class="winnings" 
+                *ngIf="(raceFinished$ | async); else racing"
                 [ngClass]="{'negative': playerBet.winnings < 0, 'positive' : playerBet.winnings > 0 }">
                 {{ playerBet.winnings | number:'1.2-2' }}
                 <span class="arrow up positive" *ngIf="playerBet.winnings > 0"></span>
                 <span class="arrow down negative" *ngIf="playerBet.winnings < 0"></span>
             </div>
+            <ng-template #racing>
+                <div class="racing-load"></div>
+            </ng-template>
         </td>
     </tr>
     </tbody>

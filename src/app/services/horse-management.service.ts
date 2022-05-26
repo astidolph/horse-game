@@ -15,22 +15,22 @@ export class HorseManagementService {
 
   private _horses: Horse[] = [];
   private _results: Horse[] = [];
-  private _raceStarted = new BehaviorSubject<boolean>(false);
-  private _raceFinished = new BehaviorSubject<boolean>(false);
+  private raceStarted$ = new BehaviorSubject<boolean>(false);
+  private raceFinished$ = new BehaviorSubject<boolean>(false);
   private totalOdds = 0;
   private oddsTable: Horse[] = [];
 
   get raceStarted(): Observable<boolean> {
-    return this._raceStarted.asObservable();
+    return this.raceStarted$.asObservable();
   }
 
   get raceFinished(): Observable<boolean> {
-    return this._raceFinished.asObservable();
+    return this.raceFinished$.asObservable();
   }
 
   setRaceStarted(val: boolean) {
-    this._raceStarted.next(val);
-    setTimeout(() => this._raceFinished.next(true), RACE_LENGTH * 1000);
+    this.raceStarted$.next(val);
+    setTimeout(() => this.raceFinished$.next(true), RACE_LENGTH * 1000);
   }
 
   get horses() {

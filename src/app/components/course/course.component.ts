@@ -10,12 +10,14 @@ import { HorseManagementService } from 'src/app/services/horse-management.servic
 })
 export class CourseComponent {
   horses: Horse[] = [];
-  raceStarted = new Observable<boolean>();
+  raceStarted$ = new Observable<boolean>();
+  raceFinished$ = new Observable<boolean>();
   timingFunction = '';
 
   constructor(private horseManagementService: HorseManagementService) {
     this.horses = this.horseManagementService.horses;
-    this.raceStarted = this.horseManagementService.raceStarted;
+    this.raceStarted$ = this.horseManagementService.raceStarted;
+    this.raceFinished$ = this.horseManagementService.raceFinished;
   }
 
    getHorseSpeed(speed: number, timingFunction: string): string {

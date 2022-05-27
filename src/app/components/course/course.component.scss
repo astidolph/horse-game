@@ -27,3 +27,182 @@
     height: 100%;
     width: 0;
 }
+
+// HORSE CSS
+$horse-size-multiplier: 0.5;
+
+// HORSE
+$horse-colour: brown;
+$horse-body-height: 50px * $horse-size-multiplier;
+$horse-body-width: 100px * $horse-size-multiplier;
+
+// HEAD
+$head-height: 25px * $horse-size-multiplier;
+$head-width: 50px * $horse-size-multiplier;
+
+// NECK
+$neck-height: 15px * $horse-size-multiplier;
+$neck-width: 50px * $horse-size-multiplier;
+
+// THIGH
+$thigh-height: 40px * $horse-size-multiplier;
+$thigh-width: 15px * $horse-size-multiplier;
+
+// CALF
+$calf-height: 40px * $horse-size-multiplier;
+$calf-width: 15px * $horse-size-multiplier;
+
+// SADDLE
+$saddle-colour: blue;
+$background-horse-colour: #872222;
+$saddle-height: 40px  * $horse-size-multiplier;
+$saddle-width: 60px  * $horse-size-multiplier;
+
+.horse .body {
+  height: $horse-body-height;
+  background: $horse-colour;
+  width: $horse-body-width;
+  border-radius: 25%;
+  position: relative;
+  
+  .saddle {
+    height: $saddle-height;
+    width: $saddle-width;
+    background: $saddle-colour;
+    border-bottom-right-radius: 25%;
+    border-bottom-left-radius: 25%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    z-index: 4;
+  }
+    
+  .neck {
+    height: $neck-height;
+    width: $neck-width;
+    background: brown;
+    border-radius: 25%;
+    position: absolute;
+    top: -20%;
+    right: -30%;
+    transform: rotate(-40deg);
+    
+    .head {
+      height: $head-height;
+      width: $head-width;
+      background: brown;
+      border-radius: 25%;
+      top: -20%;
+      right: -70%;
+      position: absolute;
+      transform: rotate(60deg);
+
+      .eye {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        background: white;
+        position: absolute;
+        right: 10px;
+
+        .pupil {
+          height: 5px;
+          width: 5px;
+          border-radius: 50%;
+          background: black;
+          position: absolute;
+          right: 2px;
+        }
+      }
+    }
+  }
+  
+  .thigh {
+    height: $thigh-height;
+    width: $thigh-width;
+    background: brown;
+    border-radius: 25%;
+    position: absolute;
+    
+    .calf {
+      height: $calf-height;
+      width: $calf-width;
+      background: brown;
+      border-bottom-right-radius: 25%;
+      border-bottom-left-radius: 25%;
+      bottom: -85%;
+      position: absolute;
+    }
+
+    &.back {
+      bottom: -65%;
+      left: 10%;
+    }
+
+    &.front {
+      bottom: -65%;
+      right: 20%;
+    }
+    
+    &.z-front {
+      z-index: 3;
+    }
+
+    &.z-back {
+      z-index: -1;
+      background: $background-horse-colour;
+
+      &.front {
+        right: 10%;
+      }
+      
+      &.back {
+        left: 25%;
+      }
+      
+      .calf {
+        background: $background-horse-colour;
+      }
+    }
+  }
+}
+
+.horse.gallop {
+  .thigh {
+    animation: thigh-move 1s linear infinite;
+  }
+  
+  .calf {
+    animation: calf-move 1s linear infinite;
+  }
+  
+  .neck {
+    animation: neck-move 1s linear infinite;
+  }
+  
+  .head {
+    animation: head-move 1s linear infinite;
+  }
+}
+
+@keyframes thigh-move {
+  0%, 100% { transform: rotate(0deg) translateX(0px); } 
+  50% { transform: rotate(-30deg) translateX(10px); }
+}
+
+@keyframes calf-move {
+  0%, 100% { transform: rotate(0deg) translateX(0px); } 
+  50% { transform: rotate(80deg) translateX(-120%) translateY(10%); }
+}
+
+@keyframes neck-move {
+  0%, 100% { transform: rotate(-40deg) } 
+  50% { transform: rotate(-50deg) }
+}
+
+@keyframes head-move {
+  0%, 100% { transform: rotate(60deg) } 
+  50% { transform: rotate(70deg) }
+}
+

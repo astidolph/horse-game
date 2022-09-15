@@ -65,6 +65,7 @@ $eye-height: 10px * $horse-size-multiplier;
 $eye-width: 10px * $horse-size-multiplier;
 $pupil-height: 5px * $horse-size-multiplier;
 $pupil-width: 5px * $horse-size-multiplier;
+$eye-left-value: 20px * $horse-size-multiplier;
 
 // EAR
 $ear-height: 10px * $horse-size-multiplier;
@@ -149,7 +150,7 @@ $tail-width: 20px * $horse-size-multiplier;
         border-radius: 50%;
         background: white;
         position: absolute;
-        left: 20px;
+        left: $eye-left-value;
 
         .pupil {
           height: $pupil-height;

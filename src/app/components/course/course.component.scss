@@ -1,12 +1,13 @@
-
 .horse-container {
     height: 100%;
     .horse {
         position: absolute;
 
-        span {
-            position: absolute;
-            cursor: pointer;
+        span.horse-name {
+          position: absolute;
+          cursor: pointer;
+          left: 100px;
+          width: 400px;
         }
     }
 }
@@ -35,6 +36,7 @@ $horse-size-multiplier: 0.5;
 $horse-colour: brown;
 $horse-body-height: 50px * $horse-size-multiplier;
 $horse-body-width: 100px * $horse-size-multiplier;
+$background-horse-colour: #872222;
 
 // HEAD
 $head-height: 25px * $horse-size-multiplier;
@@ -53,10 +55,28 @@ $calf-height: 40px * $horse-size-multiplier;
 $calf-width: 15px * $horse-size-multiplier;
 
 // SADDLE
-$saddle-colour: blue;
+$saddle-colour: yellow;
 $background-horse-colour: #872222;
-$saddle-height: 40px  * $horse-size-multiplier;
-$saddle-width: 60px  * $horse-size-multiplier;
+$saddle-height: 40px * $horse-size-multiplier;
+$saddle-width: 60px * $horse-size-multiplier;
+
+// EYES
+$eye-height: 10px * $horse-size-multiplier;
+$eye-width: 10px * $horse-size-multiplier;
+$pupil-height: 5px * $horse-size-multiplier;
+$pupil-width: 5px * $horse-size-multiplier;
+
+// EAR
+$ear-height: 10px * $horse-size-multiplier;
+$ear-width: 10px * $horse-size-multiplier;
+
+// TAIL
+$tail-height: 80px * $horse-size-multiplier;
+$tail-width: 20px * $horse-size-multiplier;
+
+.horse {
+  z-index: 1;
+}
 
 .horse .body {
   height: $horse-body-height;
@@ -77,6 +97,19 @@ $saddle-width: 60px  * $horse-size-multiplier;
     position: absolute;
     z-index: 4;
   }
+  
+  .tail {
+    height: $tail-height;
+    width: $tail-width;
+    position: absolute;
+    left: -5px;
+    top: 5px;
+    background: $background-horse-colour;
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    z-index: -1;
+    transform: rotate(60deg);
+  }
     
   .neck {
     height: $neck-height;
@@ -85,7 +118,7 @@ $saddle-width: 60px  * $horse-size-multiplier;
     border-radius: 25%;
     position: absolute;
     top: -20%;
-    right: -30%;
+    right: -25%;
     transform: rotate(-40deg);
     
     .head {
@@ -94,21 +127,33 @@ $saddle-width: 60px  * $horse-size-multiplier;
       background: brown;
       border-radius: 25%;
       top: -20%;
-      right: -70%;
+      right: -60%;
       position: absolute;
       transform: rotate(60deg);
+      
+      .ear {
+          width: $ear-height; 
+          height: $ear-width; 
+          background: $background-horse-colour;
+          position: absolute;
+          left: 0px;
+          top: -30%;
+          transform: rotate(-12deg);
+          border-top-right-radius: 50%;
+          border-bottom-right-radius: 50%;
+      }
 
       .eye {
-        height: 10px;
-        width: 10px;
+        height: $eye-height;
+        width: $eye-width;
         border-radius: 50%;
         background: white;
         position: absolute;
-        right: 10px;
+        left: 20px;
 
         .pupil {
-          height: 5px;
-          width: 5px;
+          height: $pupil-height;
+          width: $pupil-width;
           border-radius: 50%;
           background: black;
           position: absolute;
@@ -184,6 +229,10 @@ $saddle-width: 60px  * $horse-size-multiplier;
   .head {
     animation: head-move 1s linear infinite;
   }
+  
+  .tail {
+    animation: tail-move 1s linear infinite;
+  }
 }
 
 @keyframes thigh-move {
@@ -193,12 +242,12 @@ $saddle-width: 60px  * $horse-size-multiplier;
 
 @keyframes calf-move {
   0%, 100% { transform: rotate(0deg) translateX(0px); } 
-  50% { transform: rotate(80deg) translateX(-120%) translateY(10%); }
+  50% { transform: rotate(80deg) translateX(-160%) translateY(20%); }
 }
 
 @keyframes neck-move {
   0%, 100% { transform: rotate(-40deg) } 
-  50% { transform: rotate(-50deg) }
+  50% { transform: rotate(-60deg) }
 }
 
 @keyframes head-move {
@@ -206,3 +255,7 @@ $saddle-width: 60px  * $horse-size-multiplier;
   50% { transform: rotate(70deg) }
 }
 
+@keyframes tail-move {
+  0%, 100% { transform: rotate(20deg) } 
+  50% { transform: rotate(40deg) }
+}

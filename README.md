@@ -1,6 +1,8 @@
-# HorseGame
+# Horse Game
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.6.
+
+Horse betting game created as a bit of fun to play with friends. I wanted something that I could cast to the TV, take bets in on the laptop and then race.
 
 ## Development server
 
